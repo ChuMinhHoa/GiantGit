@@ -11,8 +11,9 @@ public class FirstScene : MonoBehaviour
         SceneChangeManager sceneChangeManager = SceneChangeManager.instance;
 
         saveLoadSysterm.SaveData();
-        //saveLoadSysterm.SaveBuffData();
-        //saveLoadSysterm.SaveCoinData();
+        saveLoadSysterm.SaveBuffData();
+        saveLoadSysterm.SaveCoinData();
+        saveLoadSysterm.SaveExpData();
 
         saveLoadSysterm.GetData();
         saveLoadSysterm.LoadData();
@@ -22,6 +23,9 @@ public class FirstScene : MonoBehaviour
 
         saveLoadSysterm.GetCoinData();
         saveLoadSysterm.LoadCoinData();
+
+        saveLoadSysterm.GetExpData();
+        saveLoadSysterm.LoadExpData();
 
         if (saveLoadSysterm.data != null)
         {

@@ -73,6 +73,8 @@ public class CameraAnimation : MonoBehaviour
 
     public void HitEnemy() {
 
+        gunCamera.SetActive(false);
+
         followCamera.gameObject.SetActive(false);
 
         myAnim.SetBool("BulletFollow", false);
@@ -80,7 +82,7 @@ public class CameraAnimation : MonoBehaviour
 
         cameraStatus = CameraStatusNow.FollowEnemy;
 
-        gunCamera.SetActive(false);
+        
         StopAllCoroutines();
         StartCoroutine(BackToMainCam(hitTime));
     }
@@ -156,8 +158,6 @@ public class CameraAnimation : MonoBehaviour
 
         myAnim.SetBool("BulletFollow", false);
         followCamera.gameObject.SetActive(false);
-
-        gunCamera.SetActive(true);
 
         mainCamera.m_Lens.FieldOfView = fiewOfViewDefault;
 

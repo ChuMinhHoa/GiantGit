@@ -30,7 +30,7 @@ public class BulletControll : MonoBehaviour
         virtualCam.Follow = transform;
         myBody.AddForce((target - transform.position) * speed, ForceMode.Impulse);
         BuffManager buffManager = BuffManager.instance;
-        damage += buffManager.powerBuff * buffManager.levelPowerBuff;
+        damage = buffManager.powerBuff;
     }
 
     private void FixedUpdate()
@@ -83,12 +83,12 @@ public class BulletControll : MonoBehaviour
         }
     }
 
-    void HitToEnemy(float damage, Giant otherGiant, Rigidbody otherBody, Transform otherTransform) {
+    void HitToEnemy(float _damage, Giant otherGiant, Rigidbody otherBody, Transform otherTransform) {
 
-        otherGiant.TakeDamage(damage);
+        otherGiant.TakeDamage(_damage);
 
         Vector3 vectorForce = (otherTransform.position - transform.position).normalized;
-        vectorForce.y = 1f;
+        vectorForce.y = 2f;
 
         otherBody.AddForce(vectorForce * -force, ForceMode.Impulse);
         otherGiant.plsCheckRotage = true;

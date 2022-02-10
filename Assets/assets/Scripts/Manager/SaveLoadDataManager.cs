@@ -59,7 +59,7 @@ public static class SaveLoadDataManager
 
         BuffManager buffManager = BuffManager.instance;
 
-        BuffData newBuffData = new BuffData(buffManager.levelPowerBuff, buffManager.levelBulletProfitBuff);
+        BuffData newBuffData = new BuffData(buffManager);
 
         formatter.Serialize(stream, newBuffData);
 
@@ -123,6 +123,44 @@ public static class SaveLoadDataManager
         }
         else {
             Debug.Log("File doesn't exisits.");
+            return null;
+        }
+    }
+
+    public static void SaveExp() {
+        string path = Application.persistentDataPath + "/Exp.data";
+
+        if (File.Exists(path))
+            File.Delete(path);
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        BinaryFormatter binaryFormatter = new BinaryFormatter();
+
+        ExpManager expManager = ExpManager.instance;
+        GunAndBulletManager gunAndBulletManager = GunAndBulletManager.instance;
+
+        ExpData expData = new ExpData(expManager, gunAndBulletManager);
+        
+
+        binaryFormatter.Serialize(stream, expData);
+
+        stream.Close();
+    }
+
+    public static ExpData LoadExp() {
+        string path = Application.persistentDataPath + "/Exp.data";
+
+        if (File.Exists(path))
+        {
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            ExpData expData = binaryFormatter.Deserialize(stream) as ExpData;
+            stream.Close();
+            return expData;
+        }
+        else {
+            Debug.Log("File doesn't Exists.");
             return null;
         }
     }

@@ -10,4 +10,5 @@ public class Level
     public int[] giantCount;
 
     public int reward;
+    public int expReward=200;
 }

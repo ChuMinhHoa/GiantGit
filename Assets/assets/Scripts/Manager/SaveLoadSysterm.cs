@@ -15,6 +15,7 @@ public class SaveLoadSysterm : MonoBehaviour
     public SaveData data;
     public BuffData buffData;
     public CoinData coinData;
+    public ExpData expData;
 
     public void GetData() {
         data = SaveLoadDataManager.LoadData();
@@ -49,8 +50,7 @@ public class SaveLoadSysterm : MonoBehaviour
     }
 
     public void LoadBuffData() {
-        BuffManager.instance.LoadData(buffData.levelPowerBuff,
-            buffData.levelBulletProfitBuff);
+        BuffManager.instance.LoadData(buffData);
     }
 
     public void SaveCoinData() {
@@ -59,11 +59,22 @@ public class SaveLoadSysterm : MonoBehaviour
 
     public void LoadCoinData() {
         CoinManager coinManager = CoinManager.instance;
-        coinManager.coins = coinData.coins;
+        coinManager.SetCoins(coinData.coins);
         UIManager.instance.ChangeCoinUI();
     }
 
     public void GetCoinData() {
         coinData = SaveLoadDataManager.LoadCoinData();
+    }
+
+    public void SaveExpData() {
+        SaveLoadDataManager.SaveExp();
+    }
+    public void GetExpData() {
+        expData = SaveLoadDataManager.LoadExp();
+    }
+
+    public void LoadExpData() {
+        ExpManager.instance.LoadData(expData);
     }
 }

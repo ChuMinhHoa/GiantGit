@@ -4,13 +4,27 @@ using UnityEngine;
 
 public class BuffManager : MonoBehaviour
 {
+    //price += level * constScale; 
     public int levelPowerBuff;
     public int levelBulletProfitBuff;
 
-    [Range(0,5)]
+    public int pricePB;
+    public int priceBPB;
+
+    public int incrPersentPricePB = 10;
+    public int incrPersentPriceBPB = 10;
+
+    public int increPersentPB;
+    public int increPersentBPB;
+
     public int powerBuff;
-    [Range(10, 50)]
     public int profitBuff;
+
+    public int persentPBScale;
+    public int persentBPBScale;
+
+    public int persentPricePBScale;
+    public int persentPriceBPBScale;
 
     public static BuffManager instance;
 
@@ -23,37 +37,68 @@ public class BuffManager : MonoBehaviour
     public delegate void OnBuffManagerChange();
     public OnBuffManagerChange onBuffManagerChangedCallBack;
 
+    CoinManager coinManager;
+
+    private void Start()
+    {
+        coinManager = CoinManager.instance;
+    }
     public void InscreasePB() {
+        if (coinManager.CheckCoins(pricePB))
+        {
+            levelPowerBuff += 1;
 
-        levelPowerBuff += 1;
+            coinManager.ChangeCoin(-pricePB);
 
-        //SaveBuffData
+            pricePB += ((int)(pricePB * incrPersentPricePB / 100));
 
-        SaveLoadSysterm.instance.SaveBuffData();
+            powerBuff += ((int)powerBuff * increPersentPB/100);
 
-        if (onBuffManagerChangedCallBack != null)
-            onBuffManagerChangedCallBack.Invoke();
-        
+            incrPersentPricePB += persentPBScale;
+            increPersentPB += persentPBScale;
+
+            SaveLoadSysterm.instance.SaveBuffData();
+
+            if (onBuffManagerChangedCallBack != null)
+                onBuffManagerChangedCallBack.Invoke();
+        }
     }
 
     public void InscreaseBPB()
     {
+        if (coinManager.CheckCoins(priceBPB))
+        {
+            levelBulletProfitBuff += 1;
 
-        levelBulletProfitBuff += 1;
+            coinManager.ChangeCoin(-priceBPB);
 
-        //SaveBuffData
+            priceBPB += ((int)(priceBPB * incrPersentPriceBPB/100));
 
-        SaveLoadSysterm.instance.SaveBuffData();
+            profitBuff += ((int)profitBuff * increPersentBPB / 100);
 
-        if (onBuffManagerChangedCallBack != null)
-            onBuffManagerChangedCallBack.Invoke();
+            incrPersentPriceBPB += persentPriceBPBScale;
+            increPersentBPB += persentBPBScale;
+            
+            SaveLoadSysterm.instance.SaveBuffData();
 
+            if (onBuffManagerChangedCallBack != null)
+                onBuffManagerChangedCallBack.Invoke();
+        }
     }
 
-    public void LoadData(int levelPB, int levelBPB) {
+    public void LoadData(BuffData buffData) {
 
-        levelPowerBuff = levelPB;
-        levelBulletProfitBuff = levelBPB;
+        levelPowerBuff = buffData.levelPowerBuff;
+        levelBulletProfitBuff = buffData.levelBulletProfitBuff;
+
+        pricePB = buffData.pricePB;
+        priceBPB = buffData.priceBPB;
+
+        incrPersentPricePB = buffData.incrPersentPricePB;
+        incrPersentPriceBPB = buffData.incrPersentPriceBPB;
+
+        powerBuff = buffData.powerBuff;
+        profitBuff = buffData.profitBuff;
 
         UIManager.instance.ChangeBuff();
 

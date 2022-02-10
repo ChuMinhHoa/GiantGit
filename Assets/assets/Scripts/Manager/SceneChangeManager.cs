@@ -57,7 +57,7 @@ public class SceneChangeManager : MonoBehaviour
         loadAnim.SetTrigger("LoadOut");
         changeCameraNow = true;
 
-        UIManager.instance.ChangeScene();
+        UIManager.instance.ShowMenuUI();
 
         MyCameraControll.instance.status = CameraStatus.FollowGun;
 

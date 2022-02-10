@@ -29,6 +29,9 @@ public class LevelManager : MonoBehaviour
     public int rewardCurrent;
 
     BuffManager buffManager;
+    ExpManager expManager;
+    LevelManager levelManager;
+    UIManager uIManager;
 
     public bool nextLevel;
 
@@ -38,6 +41,9 @@ public class LevelManager : MonoBehaviour
     {
         SetUpLevel();
         buffManager = BuffManager.instance;
+        expManager = ExpManager.instance;
+        levelManager = LevelManager.instance;
+        uIManager = UIManager.instance;
     }
 
     void SetUpLevel() {
@@ -98,6 +104,11 @@ public class LevelManager : MonoBehaviour
 
                     SaveLoadDataManager.SaveData();
                     nextLevel = true;
+
+                    expManager.SetGunExp(
+                        levelManager.levels[int.Parse(levelManager.levelNow) - 1].expReward
+                        + expManager.expGunCurrent);
+
                     UIManager.instance.ConfirmPanelOn(nextLevel);
 
                     break;
@@ -122,9 +133,13 @@ public class LevelManager : MonoBehaviour
                         OnLevelChangedCallback.Invoke();
 
                     nextLevel = false;
+
+                    expManager.SetGunExp(
+                        levelManager.levels[int.Parse(levelManager.levelNow) - 1].expReward
+                        + expManager.expGunCurrent);
+
                     UIManager.instance.ConfirmPanelOn(nextLevel);
                     
-                    SaveLoadDataManager.SaveData();
                 }
                 else LevelUp();
                 break;
@@ -154,6 +169,7 @@ public class LevelManager : MonoBehaviour
     //Enemydead +100 coins
     public void ChangeReward(int value) {
         rewardCurrent += value + (buffManager.levelBulletProfitBuff * buffManager.profitBuff);
+        uIManager.ChangeCoinReward(rewardCurrent);
     }
 
     //GetReward for coins.
@@ -163,5 +179,15 @@ public class LevelManager : MonoBehaviour
         SaveLoadSysterm.instance.SaveCoinData();
     }
 
-    
+    public int GetTotalGroupLevel() {
+        foreach (Level _level in levels)
+        {
+            if (_level.levelName == levelNow)
+            {
+                return _level.groupOfLevel.Length; 
+            }
+        }
+
+        return 0;
+    }
 }
