@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae6d917d027a1e7449982f2d5f1a3343, type: 3}
+  m_Name: Gun Green
+  m_EditorClassIdentifier: 
+  nameID: Gun Green
+  icon: {fileID: 0}
+  exp: 400
+  enable: 0
+  objChange: {fileID: 3784155701506835786, guid: 40846c6c7a8600049acaed0d094711b8, type: 3}
+  Damage: 60

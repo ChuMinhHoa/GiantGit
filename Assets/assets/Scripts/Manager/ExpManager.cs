@@ -55,6 +55,8 @@ public class ExpManager : MonoBehaviour
         int nextExp = gunAndBulletManager.listGun[expData.indexNextGun].exp;
         SetNextGunExp(nextExp);
 
+        gunAndBulletManager.NextGun();
+
         ExpUIManager.instance.ChangeExp();
     }
 }

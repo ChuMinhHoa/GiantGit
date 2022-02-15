@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class ScriptAbleObject_Bullet : ScriptableObject
 {
     public string nameID;
-    public GameObject objShow;
+    public Image icon;
     public int exp;
     public bool enable;
+    public GameObject objChange;
 }

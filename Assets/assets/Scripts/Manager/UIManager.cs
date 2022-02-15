@@ -106,21 +106,9 @@ public class UIManager : MonoBehaviour
         saveLoadSysterm.SaveData();
         saveLoadSysterm.SaveCoinData();
         saveLoadSysterm.SaveExpData();
-        levelConfirmUI.maxValue = levelManager.groupNow;
-        levelConfirmUI.value = 0;
-        StartCoroutine(ChangeUI());
+        
     }
-    IEnumerator ChangeUI()
-    {
-        while (levelConfirmUI.value < levelManager.groupNow - 1)
-        {
-            float value = levelConfirmUI.value + 0.01f;
-            levelConfirmUI.value = value;
-            textLevelCf.text = (int)value + "/" + levelManager.totalGroup;
-            yield return new WaitForSeconds(.01f);
-        }
-
-    }
+    
 
     public void ChangeToNextShoot() {
         

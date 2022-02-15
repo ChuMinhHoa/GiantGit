@@ -175,8 +175,7 @@ public class AimAndShoot : MonoBehaviour
         
     }
 
-    public void Reload() { 
-
+    public void Reload() {
         myAnim.SetBool("ReloadBullet", true);
         myAnim.SetBool("Shoot", false);
 

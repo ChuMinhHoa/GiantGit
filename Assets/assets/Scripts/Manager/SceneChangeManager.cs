@@ -60,6 +60,7 @@ public class SceneChangeManager : MonoBehaviour
         UIManager.instance.ShowMenuUI();
 
         MyCameraControll.instance.status = CameraStatus.FollowGun;
+        GunAndBulletManager.instance.ChangeGun();
 
         StopAllCoroutines();
         StartCoroutine(DeActiveLoadPanel());

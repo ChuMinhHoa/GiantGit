@@ -5,34 +5,74 @@ using UnityEngine.UI;
 
 public class ShowView : MonoBehaviour
 {
-
-    public Image icon;
     public List<Slot> slots;
 
-    public GameObject objCreateNow;
+    public Camera gunUICamera;
+    public Camera bulletUICamera;
+
+    public Joystick js;
+    public Vector2 rotageX;
+    public float rotageSpeed;
+    public float angle = 90;
+
+    public GameObject objView;
+    public GameObject[] listObjView;
+
+    GunAndBulletManager gABManager;
 
     public void AddSlot(Slot _slot) {
         slots.Add(_slot);
     }
 
-    public void ChangeView(GameObject objShow) {
+    public void ChangeView(Slot slot) {
+        int index = slots.IndexOf(slot);
+        if (slot.gunBool)
+        {
+            Vector3 cameraGunPosition = gunUICamera.transform.localPosition;
+            cameraGunPosition.x = 10 * index;
+            gunUICamera.transform.localPosition = cameraGunPosition;
+            objView = listObjView[index];
+        }
+        else {
+            //ChangeBulletCamera
+            Vector3 cameraBulletPosition = bulletUICamera.transform.localPosition;
+            cameraBulletPosition.x = 10 * index;
+            bulletUICamera.transform.localPosition = cameraBulletPosition;
+            GunAndBulletManager.instance.currentBulletIndex = index;
+            objView = listObjView[index];
+        }
+    }
+
+    void Start() {
+        objView = listObjView[0];
+        gABManager = GunAndBulletManager.instance;
+        gABManager.onGABchangedCallback += UnLock;
+    }
+
+    void FixedUpdate() {
+        JoyStickChange();
         
-        float width = icon.GetComponent<RectTransform>().rect.width;
-        float height = icon.GetComponent<RectTransform>().rect.height;
+        if (rotageX != Vector2.zero)
+        {
+            angle += rotageX.x * rotageSpeed;
+            objView.transform.eulerAngles = new Vector3(-45, angle, 0);
+        }
+    }
 
-        if (objCreateNow != null)
-            Destroy(objCreateNow.gameObject);
+    void JoyStickChange() {
+        rotageX.x = js.Horizontal;
+        rotageX.y = 0f;
+    }
 
-        GameObject objShowCreated =
-            Instantiate(objShow,
-            icon.transform.position,
-            objShow.transform.rotation,
-            icon.transform);
+    void UnLock() {
+        int maxIndexUnlock = gABManager.indexGun;
+        for (int i = 0; i < maxIndexUnlock; i++)
+        {
+            slots[i].blockPanel.SetActive(false);
+        }        
+    }
 
-        objCreateNow = objShowCreated;
-        Vector3 newScale = new Vector3(width / 5, width / 5, height / 5);
-        objShowCreated.transform.localScale = newScale;
-
-        
+    public int GetIndexSlot(Slot _slot) {
+        return slots.IndexOf(_slot);
     }
 }

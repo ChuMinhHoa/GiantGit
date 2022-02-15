@@ -27,19 +27,17 @@ public class ProgressBar : MonoBehaviour
     void UpdateCurrentFill() {
         if (GameobjCheck())
         {
-            groupCurrent = levelManager.groupNow;
-            mask.maxValue = levelManager.totalGroup;
-
-            mask.value = groupCurrent;
-
-            levelCurrent = levelManager.levelNow;
-
             fill.color = color;
 
-            textProgress.text = "Level " + 
-                levelCurrent + "-" + 
-                mask.value.ToString() + "/" + 
+            mask.maxValue = levelManager.totalGroup;
+            levelCurrent = levelManager.levelNow;
+
+            mask.value = levelManager.groupNow;
+            textProgress.text = "Level " +
+                levelCurrent + "-" +
+                levelManager.groupNow.ToString() + "/" +
                 mask.maxValue.ToString();
+
         }
         
 

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c59acba04fecadb41bf12f9497f96a5e, type: 3}
+  m_Name: Bullet
+  m_EditorClassIdentifier: 
+  nameID: FishBullet
+  icon: {fileID: 928392314733861421, guid: 4eb759583d2933a469c3f4a69eebfcc3, type: 3}
+  exp: 0
+  enable: 0
+  objChange: {fileID: 2068561540604427081, guid: 1d7419e073fe28a488e4115ab03da35f, type: 3}

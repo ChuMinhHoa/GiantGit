@@ -69,6 +69,7 @@
      <Compile Include="Assets\assets\Scripts\Giant\Giant.cs" />
      <Compile Include="Assets\assets\Scripts\UI\TabStore.cs" />
      <Compile Include="Assets\assets\Scripts\Camera\CameraSpawnPointsController.cs" />
+     <Compile Include="Assets\assets\Scripts\Manager\Data\ExpData.cs" />
      <Compile Include="Assets\Joystick Pack\Examples\JoystickSetterExample.cs" />
      <Compile Include="Assets\assets\Scripts\Manager\Level.cs" />
      <Compile Include="Assets\assets\Scripts\Bullet\BulletControll.cs" />
@@ -99,7 +100,6 @@
      <Compile Include="Assets\assets\Scripts\Manager\ExpUIManager.cs" />
      <Compile Include="Assets\assets\Scripts\UI\ShowView.cs" />
      <Compile Include="Assets\assets\Scripts\Manager\CameraAnimation.cs" />
-     <Compile Include="Assets\assets\Scripts\Manager\Data\ExpData.cs" />
      <None Include="Assets\assets\Toon Gas Station\ToonShading\Shaders\ToonBasicOutline.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
